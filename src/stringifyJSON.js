@@ -19,10 +19,11 @@ var stringifyJSON = function(obj) {
       return '{}';
     }
     for (var key in obj) {
-      result.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
-      // var value =  obj[key].toString();
-      // var keyName = key.toString();
-      // // let objName = keyName + ': ' + value;
+      if (key === 'functions' || key === 'undefined') {
+        continue;
+      } else {
+        result.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
+      }
     }
     return '{' + result + '}';
   }
@@ -30,10 +31,5 @@ var stringifyJSON = function(obj) {
   if (typeof obj === 'string') {
     return '"' + obj + '"';
   }
-  // test for a number
-  // test for number boolean, null, undefined
-
-  //
   return '' + obj;
-
 };
